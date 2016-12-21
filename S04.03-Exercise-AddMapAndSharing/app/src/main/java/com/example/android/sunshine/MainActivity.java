@@ -23,13 +23,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.sunshine.ForecastAdapter.ForecastAdapterOnClickHandler;
 import com.example.android.sunshine.data.SunshinePreferences;
@@ -37,6 +37,8 @@ import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
+
+import static com.example.android.sunshine.data.SunshinePreferences.getPreferredWeatherLocation;
 
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
 
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     private void loadWeatherData() {
         showWeatherDataView();
 
-        String location = SunshinePreferences.getPreferredWeatherLocation(this);
+        String location = getPreferredWeatherLocation(this);
         new FetchWeatherTask().execute(location);
     }
 
@@ -221,7 +223,20 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             return true;
         }
 
-        // TODO (2) Launch the map when the map menu item is clicked
+        if (id == R.id.action_map) {
+            String location = SunshinePreferences.getPreferredWeatherLocation(this);
+            Uri uri = Uri.parse("geo:0,0?q=" + location);
+
+            Intent viewIntent = new Intent(Intent.ACTION_VIEW)
+                    .setData(uri);
+
+            if (viewIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(viewIntent);
+            } else {
+                Toast.makeText(this, "Could not resolve: " + uri.toString(), Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
 
         return super.onOptionsItemSelected(item);
     }
