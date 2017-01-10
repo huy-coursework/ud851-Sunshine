@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp">
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+         - This Guideline divides the screen into a left half and a right half and is used to        -
+         - anchor the views to the middle of the screen.                                             -
+         - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <android.support.constraint.Guideline
+            android:id="@+id/horizontal_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"/>
+
+        <TextView
+            tools:text="Humidity"
+            android:text="@string/humidity_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/humidity_label"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            tools:text="78 %"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/humidity"
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toRightOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            tools:text="Pressure"
+            android:text="@string/pressure_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pressure_label"
+            android:layout_marginTop="64dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/humidity_label" />
+
+        <TextView
+            tools:text="998 hPa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pressure"
+            android:layout_marginTop="64dp"
+            app:layout_constraintLeft_toRightOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@+id/humidity" />
+
+        <TextView
+            tools:text="Wind"
+            android:text="@string/wind_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wind_label"
+            android:layout_marginTop="64dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pressure_label" />
+
+        <TextView
+            tools:text="3 km/h SW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wind"
+            android:layout_marginTop="64dp"
+            app:layout_constraintLeft_toRightOf="@+id/horizontal_middle"
+            app:layout_constraintTop_toBottomOf="@+id/pressure" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
